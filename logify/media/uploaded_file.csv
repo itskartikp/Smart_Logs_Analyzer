@@ -1,0 +1,7 @@
+date,timestamp,process_id,type,component,message
+2024-01-24,13:45:22.789,1234,INFO,ComponentA,"This is an informational message."
+2024-01-24,14:02:55.234,5678,ERROR,ComponentB,"An error occurred in the application."
+2024-01-24,14:18:10.456,91011,DEBUG,ComponentC,"Debugging information for troubleshooting."
+2024-01-24,14:30:45.678,121314,WARNING,ComponentD,"A warning message to alert about potential issues."
+2024-01-24,14:55:33.999,151617,INFO,ComponentA,"Another informational message."
+2024-01-24,15:10:20.123,181920,ERROR,ComponentB,"Another error occurred in the application."
