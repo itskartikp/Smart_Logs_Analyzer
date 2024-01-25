@@ -20,20 +20,25 @@ Navigate to the project directory:
 
 Install project dependencies using npm:
 
+```
 npm install
+```
 
 
 Install axios and react-dropzone:
 
-
+```
 npm install axios react-dropzone
+```
 
 This will install the necessary packages for making HTTP requests (axios) and handling file uploads (react-dropzone).
 
 
 Start the React development server:
 
+```
 npm start
+```
 This will launch the application and open it in your default web browser. By default, it will be available at http://localhost:3000.
 
 
