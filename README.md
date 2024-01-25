@@ -43,5 +43,37 @@ This will launch the application and open it in your default web browser. By def
 
 
 
+# BACKEND
 
+Create and Activate Virtual Environment:
+
+```
+virtualenv newenv
+source newenv/bin/activate
+```
+
+Install Django:
+```
+pip install django
+```
+
+Install Required Packages:
+```
+pip install djangorestframework
+pip install django-cors-headers
+pip install django-storages
+pip install pandas
+```
+
+Run Migrations:
+```
+python manage.py migrate
+```
+
+Start Django Development Server:
+```
+python manage.py runserver
+```
+
+The server is running at http://127.0.0.1:8000/ by default.
 
