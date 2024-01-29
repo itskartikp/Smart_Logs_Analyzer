@@ -51,10 +51,14 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'corsheaders.middleware.CorsMiddleware',
+    'django.middleware.csrf.CsrfViewMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
 ROOT_URLCONF = 'logify.urls'
+
+CSRF_COOKIE_SECURE = False
+
 
 TEMPLATES = [
     {
@@ -128,10 +132,10 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
-AWS_ACCESS_KEY_ID = 'your-aws-access-key-id'
-AWS_SECRET_ACCESS_KEY = 'your-aws-secret-access-key'
-AWS_STORAGE_BUCKET_NAME = 'your-s3-bucket-name'
-AWS_S3_REGION_NAME = 'your-s3-region'  # e.g., us-east-1
+AWS_ACCESS_KEY_ID = 'AKIAZQ3DRH5NBLPVG4A4'
+AWS_SECRET_ACCESS_KEY = 'fhiJWEq4NpIIzWUVGe1a6tIBUbWNo4IuJ0w1XvQq'
+AWS_REGION = 'ap-southeast-2'
+AWS_S3_BUCKET_NAME = 'oslogfiles1'
 
 DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 
@@ -143,3 +147,25 @@ CORS_ALLOWED_ORIGINS = [
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
+
+CORS_ALLOW_METHODS = [
+    'DELETE',
+    'GET',
+    'OPTIONS',
+    'PATCH',
+    'POST',
+    'PUT',
+]
+
+CORS_ALLOW_HEADERS = [
+    'accept',
+    'accept-encoding',
+    'authorization',
+    'content-type',
+    'dnt',
+    'origin',
+    'user-agent',
+    'x-csrftoken',
+    'x-requested-with',
+]
+

@@ -1,12 +1,10 @@
 import React, { useState } from 'react';
 
+
 import { Helmet } from 'react-helmet'
 
 import { Link } from 'react-router-dom';
 
-import FileUpload from '../components/FileUpload';
-
-import axios from 'axios';
 
 import './data.css'
 
@@ -15,39 +13,35 @@ const Data = (props) => {
 
   const [file, setFile] = useState(null);
 
-  const handleFileChange = (event) => {
-    const selectedFile = event.target.files[0];
-    setFile(selectedFile);
-  };
+    const handleFileChange = (event) => {
+        const selectedFile = event.target.files[0];
+        setFile(selectedFile);
+    };
 
-  const handleUpload = () => {
-    if (!file) {
-      console.error('Please select a file');
-      return;
-    }
-
-    const formData = new FormData();
-    formData.append('file', file);
-
-    fetch('http://127.0.0.1:8000/log_analyzer/api/upload/', {
-      method: 'POST',
-      body: formData,
-    })
-      .then(response => response.json())
-      .then(data => {
-        if (data.status === 'success') {
-          // Handle the response, maybe trigger visualization
-          console.log(data);
-
-          // Now data.csv_file_path contains the path to the converted CSV file
-          // You can use this path to trigger visualization or do further processing
-        } else {
-          console.error('Error:', data.message);
+    const handleUpload = () => {
+        if (!file) {
+            console.error('Please select a file');
+            return;
         }
-      })
-      .catch(error => console.error('Error:', error));
-  };
 
+        const formData = new FormData();
+        formData.append('file', file);
+
+        // Step 1: Upload the file to Django server for conversion and S3 upload
+        fetch('http://127.0.0.1:8000/log_analyzer/api/upload/', {
+            method: 'POST',
+            body: formData,
+        })
+            .then(response => response.json())
+            .then(data => {
+                if (data.status === 'success') {
+                    console.log('Upload successful. S3 file path:', data.s3_file_path);
+
+                    // Optionally, you can do further processing or trigger visualization here
+                }
+            })
+            .catch(error => console.error('Error:', error));
+    };
 
   return (
     <div className="data-container">
@@ -168,7 +162,6 @@ const Data = (props) => {
 
   <div className="image-container">
     {/* Your big image goes here */}
-    <img src="path/to/your/image.jpg" alt="Big Image" />
   </div>
 </div>
 
