@@ -1,0 +1,15 @@
+/* OptionsBarItem.css */
+.option {
+    cursor: pointer;
+    padding: 10px;
+    margin: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    user-select: none;
+  }
+  
+  .option.selected {
+    background-color: #3498db;
+    color: #fff;
+  }
+  
