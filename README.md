@@ -63,6 +63,8 @@ pip install djangorestframework
 pip install django-cors-headers
 pip install django-storages
 pip install pandas
+pip install elasticsearch
+pip install requests-aws4auth
 ```
 
 Run Migrations:
