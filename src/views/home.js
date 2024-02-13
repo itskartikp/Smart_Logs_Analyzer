@@ -55,6 +55,7 @@ const Home = (props) => {
           >
             <div className="home-nav">
               <div className="home-top">
+              <img src="./logify1.png" alt="Logify Logo" className="logo-icon" />
                 <span className="logo">LOGIFY</span>
                 <div data-thq="thq-close-menu" className="home-close-menu">
                   <svg

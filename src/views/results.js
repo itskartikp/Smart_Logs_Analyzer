@@ -3,18 +3,11 @@
 import React from 'react';
 import './results.css';
 
-import OptionsBar from '../components/OptionBar';
-
-
-import { Helmet } from 'react-helmet'
 
 import { Link } from 'react-router-dom';
 
 const   Results = () => {
-
-    const redirectToElastic = () => {
-        window.location.href = 'https://www.google.com'; // Redirect to Google
-      };
+   
   
 
   return (
@@ -63,7 +56,7 @@ const   Results = () => {
         <div className="card">
           <img className="card-logo" src="discover.png" alt="Discover Logo" />
           <h2>Discover</h2>
-          <p>Explore your log data and discover insights.</p>
+          <p>Explore your log data, monitor logs and dhhjdhjdjdj and discover insights.</p>
           <Link to="/discover" className="action-button">
             Go to Discover
           </Link>
@@ -72,7 +65,7 @@ const   Results = () => {
         <div className="card">
           <img className="card-logo" src="visualize.png" alt="Visualize Logo" />
           <h2>Visualize</h2>
-          <p>Visualize log patterns for better understanding.</p>
+          <p>Visualize log patterns and gain insights for better understanding.</p>
           <Link to="/visualize" className="action-button">
             Go to Visualize
           </Link>
@@ -81,7 +74,7 @@ const   Results = () => {
         <div className="card">
           <img className="card-logo" src="generate.png" alt="Generate Report Logo" />
           <h2>Generate Report</h2>
-          <p>Generate a comprehensive report for log analysis.</p>
+          <p>Generate a comprehensive pdf report for log analysis and visualizations.</p>
           <Link to="/generate-report" className="action-button">
             Generate Report
           </Link>

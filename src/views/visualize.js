@@ -39,7 +39,7 @@ const   Visualize = () => {
             </div>
             </header>
 
-            <iframe src="https://896f-115-248-146-117.ngrok-free.app/app/dashboards#/view/f84ba7a0-b6a9-11ee-bcf8-73327f2b6462?embed=true&_g=(refreshInterval:(pause:!t,value:60000),time:(from:now-15m,to:now))&_a=()&show-top-menu=true&show-query-input=true&show-time-filter=true" height="1000px" width="100%"></iframe>
+            <iframe src="http://localhost:5601/app/dashboards#/view/f84ba7a0-b6a9-11ee-bcf8-73327f2b6462?embed=true&_g=(refreshInterval:(pause:!t,value:60000),time:(from:now-15m,to:now))&_a=()&show-top-menu=true&show-query-input=true&show-time-filter=true" title="kibana" height="1000px" width="100%"></iframe>
 
       
       </div>

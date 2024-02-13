@@ -3,45 +3,50 @@ import React, { useState } from 'react';
 
 import { Helmet } from 'react-helmet'
 
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
+
+
 
 
 import './data.css'
 
-const Data = (props) => {
+  const Data = (props) => {
 
 
-  const [file, setFile] = useState(null);
+    const [file, setFile] = useState(null);
+    const navigate = useHistory();
 
-    const handleFileChange = (event) => {
-        const selectedFile = event.target.files[0];
-        setFile(selectedFile);
-    };
 
-    const handleUpload = () => {
-        if (!file) {
-            console.error('Please select a file');
-            return;
-        }
+      const handleFileChange = (event) => {
+          const selectedFile = event.target.files[0];
+          setFile(selectedFile);
+      };
 
-        const formData = new FormData();
-        formData.append('file', file);
+      const handleUpload = () => {
+          if (!file) {
+              console.error('Please select a file');
+              return;
+          }
 
-        // Step 1: Upload the file to Django server for conversion and S3 upload
-        fetch('http://127.0.0.1:8000/log_analyzer/api/upload/', {
-            method: 'POST',
-            body: formData,
-        })
-            .then(response => response.json())
-            .then(data => {
-                if (data.status === 'success') {
-                    console.log('Upload successful. S3 file path:', data.s3_file_path);
+          const formData = new FormData();
+          formData.append('file', file);
 
-                    // Optionally, you can do further processing or trigger visualization here
-                }
-            })
-            .catch(error => console.error('Error:', error));
-    };
+          // Step 1: Upload the file to Django server for conversion and S3 upload
+          fetch('http://127.0.0.1:8000/log_analyzer/api/upload/', {
+              method: 'POST',
+              body: formData,
+          })
+              .then(response => response.json())
+              .then(data => {
+                  if (data.status === 'success') {
+                      console.log('Upload successful. S3 file path:', data.s3_file_path);
+
+                      navigate.push('/result');
+
+                  }
+              })
+              .catch(error => console.error('Error:', error));
+      };
 
   return (
     <div className="data-container">
@@ -164,21 +169,6 @@ const Data = (props) => {
     {/* Your big image goes here */}
   </div>
 </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
       </div>
   )

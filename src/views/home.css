@@ -6,6 +6,15 @@
   align-items: center;
   flex-direction: column;
 }
+
+.logo-icon {
+  height: 30px; /* Adjust based on your actual icon size */
+  width: auto;
+  margin-right: 8px; /* Space between icon and text */
+  vertical-align: middle; /* Aligns icon with the text */
+}
+
+
 .home-header {
   width: 100%;
   display: flex;

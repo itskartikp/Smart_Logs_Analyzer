@@ -5,9 +5,11 @@
   "dependencies": {
     "@craco/craco": "^5.9.0",
     "aws-sdk": "^2.1545.0",
+    "axios": "^1.6.7",
     "prop-types": "15.7.2",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
+    "react-dropzone": "^14.2.3",
     "react-helmet": "^6.1.0",
     "react-router-dom": "^5.2.0"
   },
