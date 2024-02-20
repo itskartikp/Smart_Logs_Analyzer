@@ -16,6 +16,10 @@ import './data.css'
     const [file, setFile] = useState(null);
     const navigate = useHistory();
 
+    const redirectToLogstash = () => {
+      navigate.push('/logstash'); 
+    };
+
 
       const handleFileChange = (event) => {
           const selectedFile = event.target.files[0];
@@ -158,9 +162,9 @@ import './data.css'
     </div>
 
       <div className="option-card">
-        <h2>Connect with Elasticsearch</h2>
-        <p>Choose this option to connect with Elasticsearch for real-time log monitoring.</p>
-        <button className="action-button">Connect with Elasticsearch</button>
+        <h2>Connect with Logstash</h2>
+        <p>Choose this option to connect with Logstash for real-time log monitoring.</p>
+        <button className="action-button" onClick={redirectToLogstash}>Connect with Logstash</button>
       </div>
     </div>
   </div>

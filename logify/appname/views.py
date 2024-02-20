@@ -11,6 +11,10 @@ from elasticsearch import Elasticsearch, RequestsHttpConnection, helpers
 from requests_aws4auth import AWS4Auth
 import csv
 from io import StringIO
+from sklearn.cluster import KMeans
+from sklearn.preprocessing import StandardScaler
+import numpy as np
+
 
 
 
@@ -58,14 +62,83 @@ def upload_file(request):
 
             df = pd.DataFrame(logs)
 
+            df['IP_Address'] = df['message'].str.extract(r'(\d+\.\d+\.\d+\.\d+)')
+            df['HTTP_Status'] = df['message'].str.extract(r'status: (\d+)')
+            
+
+            label_mapping = {
+                # Compute (Nova)
+                'nova.osapi_compute.wsgi.server': 'Compute',
+                'nova.compute.api': 'Compute',
+                'nova.scheduler': 'Compute',
+                'nova.conductor': 'Compute',
+                'nova.compute.manager': 'Compute',
+
+                # Storage (Cinder for Block Storage, Swift for Object Storage)
+                'cinder.api.openstack.wsgi': 'Storage',
+                'cinder.volume.api': 'Storage',
+                'cinder.scheduler': 'Storage',
+                'cinder.volume.manager': 'Storage',
+                'cinder.backup.api': 'Storage',
+                'swift.object': 'Storage',
+                'swift.container': 'Storage',
+                'swift.account': 'Storage',
+
+                # Networking (Neutron)
+                'neutron.api.v2.router': 'Networking',
+                'neutron.plugins.ml2': 'Networking',
+                'neutron.dhcp.agent': 'Networking',
+                'neutron.l3.agent': 'Networking',
+                'neutron.agent.securitygroups_implementation': 'Networking',
+
+                # Identity (Keystone)
+                'keystone.endpoint': 'Identity',
+                'keystone.assignment': 'Identity',
+                'keystone.auth.plugins.password': 'Identity',
+                'keystone.catalog': 'Identity',
+                'keystone.identity': 'Identity',
+
+                # General or common components not specific to a class
+                'oslo_concurrency.lockutils': None,
+            }
+            
+            def refine_classification(row):
+                
+                label = label_mapping.get(row['component'], None)
+                
+                if label is None:
+                    message = row['message'].lower()  # Convert message to lowercase to ensure consistent matching
+                    if 'cinder' in message:
+                       label = 'Storage'
+                    elif 'nova' in message:
+                       label = 'Compute'
+                    elif 'neutron' in message:
+                       label = 'Networking'
+                    else:
+                       label = 'Compute'  # Default to Compute if no specific keyword is found
+
+                return label
+
+                
+
+            df['label'] = df['component'].map(label_mapping)
+            df['label'] = df.apply(refine_classification, axis=1)
+    
+
+            
+
+
+
+            new_csv_file_path = 'enhanced_uploaded_file.csv'
+
 
 
             # Save the DataFrame to a CSV file
             csv_file_path = 'uploaded_file.csv'
-            df.to_csv(csv_file_path, index=False)
+            df.to_csv(new_csv_file_path, index=False)
 
             # Upload the CSV file to S3
-            upload_to_s3(csv_file_path, AWS_S3_BUCKET_NAME, 'uploaded_file.csv')
+            upload_to_s3(new_csv_file_path, AWS_S3_BUCKET_NAME, 'enhanced_uploaded_file.csv')
 
             es.indices.delete(index=index_name)
             es.indices.create(index=index_name, body={
@@ -101,7 +174,7 @@ def upload_file(request):
 
 
 
-            csv_data = fetch_and_parse_csv_from_s3(AWS_S3_BUCKET_NAME, S3_KEY)
+            csv_data = fetch_and_parse_csv_from_s3(AWS_S3_BUCKET_NAME, 'enhanced_uploaded_file.csv')
             index_data_to_es(csv_data, index_name)
 
             

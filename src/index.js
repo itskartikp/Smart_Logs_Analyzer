@@ -14,6 +14,7 @@ import NotFound from './views/not-found'
 import Results from './views/results'
 import Discover from './views/discover'
 import Visualize from './views/visualize'
+import Logstash from './views/logstash'
 
 const App = () => {
   return (
@@ -24,6 +25,7 @@ const App = () => {
         <Route component={Results} exact path="/result" />
         <Route component={Discover} exact path="/discover" />
         <Route component={Visualize} exact path="/visualize" />
+        <Route component={Logstash} exact path="/logstash" />
         <Route component={NotFound} path="**" />
         <Redirect to="**" />
       </Switch>

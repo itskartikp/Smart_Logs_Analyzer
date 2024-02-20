@@ -43,7 +43,7 @@ const   Discover = () => {
         title="Elastic Discover"
         width="100%"
         height="1000px"
-        src="http://localhost:5601/app/discover#/?_g=(filters:!(),refreshInterval:(pause:!t,value:60000),time:(from:'2018-06-25T18:30:00.000Z',to:'2018-06-25T18:30:00.000Z'))&_a=(columns:!(),filters:!(),hideChart:!t,index:b4313753-1a3d-40b0-a7c4-196565708882,interval:auto,query:(language:kuery,query:''),sort:!(!('@timestamp',desc)))"
+        src="http://localhost:5601/app/discover#/?_g=(filters:!(),refreshInterval:(pause:!t,value:60000),time:(from:now-15m,to:now))&_a=(columns:!(),filters:!(),hideChart:!t,index:cf45e70b-f603-4634-b8b9-5d25c7652d27,interval:auto,query:(language:kuery,query:''),sort:!())"
         allowFullScreen
       ></iframe>
       
